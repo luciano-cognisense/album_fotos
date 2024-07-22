@@ -34,7 +34,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 80%; /* Largura original do contêiner */
-    height: 80%; /* Altura original do contêiner */
+    height: 90%; /* Altura original do contêiner */
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -44,7 +44,7 @@ body {
 
 .photo {
     width: 100%;
-    height: 70%; /* Altura original da imagem */
+    height: 80%; /* Altura original da imagem */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -92,4 +92,15 @@ body {
     right: 20px; /* Posição original do número da página */
     font-size: 1em; /* Tamanho original da fonte do número da página */
     color: #fff;
+}
+
+.page-footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    /*background-color: rgba(0, 0, 0, 0.8);*/
+}
+
+.page-footer img {
+    width: 100px; /* Ajuste o tamanho conforme necessário */
 }
