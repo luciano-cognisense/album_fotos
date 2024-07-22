@@ -1,20 +1,31 @@
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     background: linear-gradient(135deg, #f06, #aaf);
     color: #fff;
 }
 
-.container {
+.page-header {
     width: 100%;
-    height: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 2em; /* Tamanho original do título */
+}
+
+.container {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .photo-book {
@@ -22,29 +33,30 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    height: 80%;
+    width: 80%; /* Largura original do contêiner */
+    height: 80%; /* Altura original do contêiner */
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    padding: 20px; /* Padding original */
+    position: relative;
 }
 
 .photo {
     width: 100%;
-    height: 70%;
+    height: 70%; /* Altura original da imagem */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Margem original abaixo da imagem */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .caption {
-    font-size: 1.5em;
+    font-size: 1.5em; /* Tamanho original da fonte da legenda */
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Margem original abaixo da legenda */
 }
 
 .controls {
@@ -54,9 +66,9 @@ body {
 }
 
 .controls button {
-    padding: 15px 30px;
-    margin: 0 10px;
-    font-size: 1em;
+    padding: 15px 30px; /* Padding original dos botões */
+    margin: 0 10px; /* Margem original entre os botões */
+    font-size: 1em; /* Tamanho original da fonte dos botões */
     cursor: pointer;
     background-color: #fff;
     border: none;
@@ -72,4 +84,12 @@ body {
 .controls button:disabled {
     background-color: #aaa;
     cursor: not-allowed;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 10px;
+    right: 20px; /* Posição original do número da página */
+    font-size: 1em; /* Tamanho original da fonte do número da página */
+    color: #fff;
 }
