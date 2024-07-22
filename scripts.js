@@ -13,7 +13,7 @@ const photos = [
     },
     {
         src: 'Fotos/Julia-Monalisa.jpeg',
-        caption: 'Monalisa - Julia (2024)'
+        caption: 'Monalisa - Júlia (2024)'
     },
     {
         src: 'Fotos/OGrito-JoãoDelevatti.jpeg',
@@ -57,11 +57,11 @@ const photos = [
     },
     {
         src: 'Fotos/Mulhercomumguarda-sol-Diana.jpeg',
-        caption: 'Mulher com um guarda-sol, virada para a direita - Claude Monet (1886)'
+        caption: 'Mulher com um guarda-sol - Claude Monet (1886)'
     },
     {
         src: 'Fotos/Diana-Mulhercomumguarda-sol.jpeg',
-        caption: 'Mulher com um guarda-sol, virada para a direita - Diana (2024)'
+        caption: 'Mulher com um guarda-sol - Diana (2024)'
     },
     {
         src: 'Fotos/FridaKahlo-Gaia.jpeg',
@@ -117,7 +117,7 @@ const photos = [
     },
     {
         src: 'Fotos/LiviaBlansk-LaToilette.jpeg',
-        caption: 'La Toilette - mulher penteando seu cabelo - Lívia Blansk (2024)'
+        caption: 'La Toilette - mulher penteando seu cabelo - Lívia B. (2024)'
     },
     {
         src: 'Fotos/EstudoOleo-LiviaWolf.jpg',
@@ -125,7 +125,7 @@ const photos = [
     },
     {
         src: 'Fotos/LiviaWolf-EstudoOleo.jpeg',
-        caption: 'Estudo em Óleo - Lívia Wolf (2024)'
+        caption: 'Estudo em Óleo - Lívia W. (2024)'
     },
     {
         src: 'Fotos/MeninoECoelho-Luke.jpeg',

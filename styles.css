@@ -12,12 +12,12 @@ body {
 .page-header {
     width: 100%;
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .page-header h1 {
     margin: 0;
-    font-size: 2em; /* Tamanho original do título */
+    font-size: 1.5em; /* Tamanho original do título */
 }
 
 .container {
@@ -54,7 +54,7 @@ body {
 }
 
 .caption {
-    font-size: 1.5em; /* Tamanho original da fonte da legenda */
+    font-size: 1.0em; /* Tamanho original da fonte da legenda */
     text-align: center;
     margin-bottom: 20px; /* Margem original abaixo da legenda */
 }
@@ -66,7 +66,7 @@ body {
 }
 
 .controls button {
-    padding: 15px 30px; /* Padding original dos botões */
+    padding: 10px 20px; /* Padding original dos botões */
     margin: 0 10px; /* Margem original entre os botões */
     font-size: 1em; /* Tamanho original da fonte dos botões */
     cursor: pointer;
