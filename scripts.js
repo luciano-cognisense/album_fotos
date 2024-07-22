@@ -124,7 +124,7 @@ const photos = [
         caption: 'Estudo em Óleo - John William Waterhouse (1917)'
     },
     {
-        src: 'Fotos/LiviaWolf-EstudoOleo.jpeg',
+        src: 'Fotos/LiviaWolf-EstudoOleo.jpg',
         caption: 'Estudo em Óleo - Lívia W. (2024)'
     },
     {
