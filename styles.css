@@ -90,7 +90,7 @@ body {
     position: absolute;
     bottom: 10px;
     right: 20px; /* Posição original do número da página */
-    font-size: 1em; /* Tamanho original da fonte do número da página */
+    font-size: 0.6em; /* Tamanho original da fonte do número da página */
     color: #fff;
 }
 
