@@ -142,6 +142,14 @@ const photos = [
     {
         src: 'Fotos/Samuel-OTocadorDeViolao.jpeg',
         caption: 'O Tocador de Violão - Samuel (2024)'
+    },
+    {
+        src: 'Fotos/GarotaNaJanela-Lis.png',
+        caption: 'Garota na Janela - Salvador Dalí (1925)'
+    },
+    {
+        src: 'Fotos/Lis-GarotaNaJanela.jfif',
+        caption: 'Garota na Janela - Lis (2024)'
     }
 ];
 
