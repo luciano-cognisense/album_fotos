@@ -150,6 +150,14 @@ const photos = [
     {
         src: 'Fotos/Lis-GarotaNaJanela.jfif',
         caption: 'Garota na Janela - Lis (2024)'
+    },
+    {
+        src: 'Fotos/Letoile-Beatriz.png',
+        caption: 'A Estrela - Edgar Degas (1878)'
+    },
+    {
+        src: 'Fotos/Beatriz-Letoile.jpeg',
+        caption: 'A Estrela - Beatriz (2024)'
     }
 ];
 
