@@ -71,3 +71,13 @@ body.viewer-open { overflow: hidden; }
 
 .photo-viewer:not([open]) { display: none; }
 .photo-viewer[open] { display: block; z-index: 1000; }
+
+.viewer-image { touch-action: pan-y pinch-zoom; }
+.viewer-caption {
+    position: absolute; bottom: 0; left: 0; right: 0; margin: 0;
+    padding: 32px max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    background: linear-gradient(transparent, rgba(0, 0, 0, .75));
+    color: #fff; font-size: clamp(.75rem, 2.8vw, .95rem);
+    line-height: 1.5; text-align: center; text-shadow: 0 1px 3px #000;
+    pointer-events: none; overflow-wrap: anywhere;
+}
