@@ -14,19 +14,23 @@
     </header>
     <main class="container">
         <section class="photo-book" aria-label="Álbum de releituras">
-            <img class="photo" id="photo" alt="" draggable="false">
+            <img class="photo" id="photo" alt="" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Abrir foto em tela cheia" draggable="false">
             <div class="caption" id="caption" aria-live="polite"></div>
             <div class="controls">
                 <button id="prevBtn">Anterior</button>
                 <button id="nextBtn">Próxima</button>
             </div>
             <div class="page-number" id="pageNumber" aria-live="polite"></div>
-            <p class="hint">Deslize sobre a foto para navegar</p>
+            <p class="hint">Toque na foto para ampliar • Deslize para navegar</p>
         </section>
     </main>
     <footer class="page-footer">
         <img src="Fotos/logo.png" alt="Logo">
     </footer>
+    <dialog id="photoViewer" class="photo-viewer" aria-label="Foto em tela cheia">
+        <button id="closeViewer" class="close-viewer" type="button" autofocus aria-label="Fechar foto em tela cheia">✕ Fechar</button>
+        <img id="viewerImage" class="viewer-image" alt="">
+    </dialog>
     <script src="scripts.js"></script>
 </body>
 </html>
