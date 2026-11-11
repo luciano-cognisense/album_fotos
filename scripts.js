@@ -214,6 +214,10 @@ photoSurface.addEventListener('touchend', (event) => {
     const dx = event.changedTouches[0].clientX - swipeStart.x;
     const dy = event.changedTouches[0].clientY - swipeStart.y;
     swipeStart = null;
+    if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+        openPhotoViewer();
+        return;
+    }
     if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
         suppressPhotoClickUntil = Date.now() + 500;
         document.getElementById(dx < 0 ? 'nextBtn' : 'prevBtn').click();
@@ -227,19 +231,22 @@ function openPhotoViewer() {
     if (Date.now() < suppressPhotoClickUntil || photoViewer.open) return;
     viewerImage.src = photoSurface.src;
     viewerImage.alt = photoSurface.alt;
-    photoViewer.showModal();
-    document.body.classList.add('viewer-open');
-    // Use native fullscreen where available; the dialog fills the screen otherwise.
-    if (photoViewer.requestFullscreen && document.fullscreenEnabled) {
-        photoViewer.requestFullscreen().then(() => {
-            if (!photoViewer.open && document.fullscreenElement === photoViewer) {
-                document.exitFullscreen().catch(() => {});
-            }
-        }).catch(() => {});
+    if (typeof photoViewer.showModal === 'function') {
+        photoViewer.showModal();
+    } else {
+        photoViewer.setAttribute('open', '');
     }
+    document.getElementById('closeViewer').focus();
+    document.body.classList.add('viewer-open');
+
 }
 function closePhotoViewer() {
-    if (photoViewer.open) photoViewer.close();
+    if (!photoViewer.open) return;
+    if (typeof photoViewer.close === 'function') photoViewer.close();
+    else {
+        photoViewer.removeAttribute('open');
+        restoreAlbum();
+    }
 }
 photoSurface.addEventListener('click', openPhotoViewer);
 photoSurface.addEventListener('keydown', (event) => {
@@ -249,11 +256,8 @@ photoSurface.addEventListener('keydown', (event) => {
     }
 });
 document.getElementById('closeViewer').addEventListener('click', closePhotoViewer);
-photoViewer.addEventListener('close', () => {
+function restoreAlbum() {
     document.body.classList.remove('viewer-open');
-    if (document.fullscreenElement === photoViewer) document.exitFullscreen().catch(() => {});
     photoSurface.focus();
-});
-document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) closePhotoViewer();
-});
+}
+photoViewer.addEventListener('close', restoreAlbum);
