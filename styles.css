@@ -68,3 +68,6 @@ body.viewer-open { overflow: hidden; }
     font: inherit; cursor: pointer;
 }
 .close-viewer:focus-visible { outline: 3px solid #ffb8df; outline-offset: 3px; }
+
+.photo-viewer:not([open]) { display: none; }
+.photo-viewer[open] { display: block; z-index: 1000; }
