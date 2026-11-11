@@ -170,7 +170,8 @@ function updatePhotoBook() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
-    photo.style.backgroundImage = `url(${photos[currentIndex].src})`;
+    photo.src = photos[currentIndex].src;
+    photo.alt = photos[currentIndex].caption;
     caption.textContent = photos[currentIndex].caption;
     pageNumber.textContent = `Página ${currentIndex + 1} de ${photos.length}`;
 
@@ -193,3 +194,27 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 });
 
 updatePhotoBook();
+
+document.addEventListener('keydown', (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (event.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+    if (event.key === 'ArrowRight') document.getElementById('nextBtn').click();
+});
+
+// Preserve vertical scrolling and pinch zoom; only a clear one-finger swipe navigates.
+const photoSurface = document.getElementById('photo');
+let swipeStart = null;
+photoSurface.addEventListener('touchstart', (event) => {
+    swipeStart = event.touches.length === 1
+        ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+}, { passive: true });
+photoSurface.addEventListener('touchend', (event) => {
+    if (!swipeStart || event.touches.length) { swipeStart = null; return; }
+    const dx = event.changedTouches[0].clientX - swipeStart.x;
+    const dy = event.changedTouches[0].clientY - swipeStart.y;
+    swipeStart = null;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        document.getElementById(dx < 0 ? 'nextBtn' : 'prevBtn').click();
+    }
+}, { passive: true });
+photoSurface.addEventListener('touchcancel', () => { swipeStart = null; }, { passive: true });
