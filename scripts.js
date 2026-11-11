@@ -229,8 +229,7 @@ const photoViewer = document.getElementById('photoViewer');
 const viewerImage = document.getElementById('viewerImage');
 function openPhotoViewer() {
     if (Date.now() < suppressPhotoClickUntil || photoViewer.open) return;
-    viewerImage.src = photoSurface.src;
-    viewerImage.alt = photoSurface.alt;
+    updateViewer();
     if (typeof photoViewer.showModal === 'function') {
         photoViewer.showModal();
     } else {
@@ -261,3 +260,50 @@ function restoreAlbum() {
     photoSurface.focus();
 }
 photoViewer.addEventListener('close', restoreAlbum);
+
+function updateViewer() {
+    viewerImage.src = photos[currentIndex].src;
+    viewerImage.alt = photos[currentIndex].caption;
+    document.getElementById('viewerCaption').textContent = photos[currentIndex].caption;
+}
+function navigateViewer(direction) {
+    const nextIndex = currentIndex + direction;
+    if (nextIndex < 0 || nextIndex >= photos.length) return;
+    currentIndex = nextIndex;
+    updatePhotoBook();
+    updateViewer();
+}
+let viewerSwipeStart = null;
+let viewerMultiTouch = false;
+photoViewer.addEventListener('touchstart', (event) => {
+    if (event.touches.length !== 1) {
+        viewerMultiTouch = true;
+        viewerSwipeStart = null;
+        return;
+    }
+    if (event.target.closest && event.target.closest('button')) return;
+    viewerMultiTouch = false;
+    viewerSwipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+}, { passive: true });
+photoViewer.addEventListener('touchend', (event) => {
+    if (viewerMultiTouch || !viewerSwipeStart || event.touches.length) return;
+    const dx = event.changedTouches[0].clientX - viewerSwipeStart.x;
+    const dy = event.changedTouches[0].clientY - viewerSwipeStart.y;
+    viewerSwipeStart = null;
+    // Leave pinching and panning a zoomed image to the browser.
+    if (window.visualViewport && window.visualViewport.scale > 1.05) return;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        navigateViewer(dx < 0 ? 1 : -1);
+    }
+}, { passive: true });
+photoViewer.addEventListener('touchcancel', () => {
+    viewerSwipeStart = null;
+    viewerMultiTouch = false;
+}, { passive: true });
+photoViewer.addEventListener('keydown', (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        navigateViewer(event.key === 'ArrowRight' ? 1 : -1);
+    }
+});
