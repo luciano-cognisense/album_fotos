@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Jardim 1 - Releitura de Obras Famosas</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -12,17 +12,18 @@
     <header class="page-header">
         <h1>Jardim 1 - Releitura de Obras Famosas</h1>
     </header>
-    <div class="container">
-        <div class="photo-book">
-            <div class="photo" id="photo"></div>
-            <div class="caption" id="caption"></div>
+    <main class="container">
+        <section class="photo-book" aria-label="Álbum de releituras">
+            <img class="photo" id="photo" alt="" draggable="false">
+            <div class="caption" id="caption" aria-live="polite"></div>
             <div class="controls">
                 <button id="prevBtn">Anterior</button>
                 <button id="nextBtn">Próxima</button>
             </div>
-            <div class="page-number" id="pageNumber"></div>
-        </div>
-    </div>
+            <div class="page-number" id="pageNumber" aria-live="polite"></div>
+            <p class="hint">Deslize sobre a foto para navegar</p>
+        </section>
+    </main>
     <footer class="page-footer">
         <img src="Fotos/logo.png" alt="Logo">
     </footer>
