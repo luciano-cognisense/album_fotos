@@ -196,7 +196,7 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 updatePhotoBook();
 
 document.addEventListener('keydown', (event) => {
-    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (document.getElementById('photoViewer').open || event.altKey || event.ctrlKey || event.metaKey) return;
     if (event.key === 'ArrowLeft') document.getElementById('prevBtn').click();
     if (event.key === 'ArrowRight') document.getElementById('nextBtn').click();
 });
@@ -204,6 +204,7 @@ document.addEventListener('keydown', (event) => {
 // Preserve vertical scrolling and pinch zoom; only a clear one-finger swipe navigates.
 const photoSurface = document.getElementById('photo');
 let swipeStart = null;
+let suppressPhotoClickUntil = 0;
 photoSurface.addEventListener('touchstart', (event) => {
     swipeStart = event.touches.length === 1
         ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
@@ -214,7 +215,45 @@ photoSurface.addEventListener('touchend', (event) => {
     const dy = event.changedTouches[0].clientY - swipeStart.y;
     swipeStart = null;
     if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        suppressPhotoClickUntil = Date.now() + 500;
         document.getElementById(dx < 0 ? 'nextBtn' : 'prevBtn').click();
     }
 }, { passive: true });
 photoSurface.addEventListener('touchcancel', () => { swipeStart = null; }, { passive: true });
+
+const photoViewer = document.getElementById('photoViewer');
+const viewerImage = document.getElementById('viewerImage');
+function openPhotoViewer() {
+    if (Date.now() < suppressPhotoClickUntil || photoViewer.open) return;
+    viewerImage.src = photoSurface.src;
+    viewerImage.alt = photoSurface.alt;
+    photoViewer.showModal();
+    document.body.classList.add('viewer-open');
+    // Use native fullscreen where available; the dialog fills the screen otherwise.
+    if (photoViewer.requestFullscreen && document.fullscreenEnabled) {
+        photoViewer.requestFullscreen().then(() => {
+            if (!photoViewer.open && document.fullscreenElement === photoViewer) {
+                document.exitFullscreen().catch(() => {});
+            }
+        }).catch(() => {});
+    }
+}
+function closePhotoViewer() {
+    if (photoViewer.open) photoViewer.close();
+}
+photoSurface.addEventListener('click', openPhotoViewer);
+photoSurface.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openPhotoViewer();
+    }
+});
+document.getElementById('closeViewer').addEventListener('click', closePhotoViewer);
+photoViewer.addEventListener('close', () => {
+    document.body.classList.remove('viewer-open');
+    if (document.fullscreenElement === photoViewer) document.exitFullscreen().catch(() => {});
+    photoSurface.focus();
+});
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) closePhotoViewer();
+});
