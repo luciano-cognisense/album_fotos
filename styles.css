@@ -48,3 +48,23 @@ body {
 @media (max-height: 500px) and (orientation: landscape) {
     .photo { height: 65svh; min-height: 180px; }
 }
+
+.photo { cursor: zoom-in; }
+.photo:focus-visible { outline: 3px solid #ffb8df; outline-offset: 4px; }
+body.viewer-open { overflow: hidden; }
+.photo-viewer {
+    position: fixed; inset: 0; margin: 0; border: 0; padding: 0;
+    width: 100vw; max-width: none; height: 100vh; height: 100dvh;
+    max-height: none; background: #08080b; color: white;
+}
+.photo-viewer::backdrop { background: #08080b; }
+.viewer-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.close-viewer {
+    position: absolute; z-index: 1;
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    min-height: 48px; padding: 12px 18px; border: 1px solid #777;
+    border-radius: 10px; background: #17171deb; color: white;
+    font: inherit; cursor: pointer;
+}
+.close-viewer:focus-visible { outline: 3px solid #ffb8df; outline-offset: 3px; }
